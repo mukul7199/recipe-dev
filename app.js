@@ -10,6 +10,7 @@ const MONGODB_URI =
 
 // Load routes
 const recipesRoute = require("./routes/recipes");
+const usersRoute = require("./routes/users");
 
 // Middleware
 app.use(bodyParser.json());
@@ -45,6 +46,7 @@ app.get("/", (req, res) => {
 
 // Use routes
 app.use("/recipes", recipesRoute);
+app.use("/users", usersRoute);
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 

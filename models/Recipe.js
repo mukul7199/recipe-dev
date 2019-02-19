@@ -23,6 +23,10 @@ const recipeSchema = new mongoose.Schema({
   image: {
     type: String,
     trim: true
+  },
+  createdBy: {
+    trim: true,
+    type: mongoose.Types.ObjectId
   }
 });
 
