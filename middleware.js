@@ -12,7 +12,7 @@ const authenticate = (req, res, next) => {
         req.user = user;
         next();
       } else {
-        res.send(401);
+        res.status(401).send({ message: "user not found" });
       }
     });
   } else {

@@ -16,7 +16,7 @@ router.get("/me", middleware.authenticate, (req, res) => {
   });
 });
 
-router.post("/", middleware.authenticate, (req, res) => {
+router.post("/", (req, res) => {
   const { title, image } = req.body;
   const ingredients = req.body.ingredients + "";
   const steps = req.body.steps + "";
@@ -31,11 +31,28 @@ router.post("/", middleware.authenticate, (req, res) => {
     title,
     ingredients: newIngredients,
     steps: newSteps,
-    createdBy: req.user._id,
     image
   });
 
   newRecipe.save().then(recipe => res.send({ recipe }));
+});
+
+router.delete("/me/:id", middleware.authenticate, (req, res) => {
+  Recipe.findOneAndDelete({ _id: req.params.id }).then(recipe => {
+    res.send(recipe);
+  });
+});
+
+router.patch("/me/:id", (req, res) => {
+  const { title, ingredients, steps, image } = req.body;
+  const body = { title, ingredients, steps, image };
+  Recipe.findOneAndUpdate(
+    { _id: req.params.id },
+    { $set: body },
+    { new: true }
+  ).then(recipe => {
+    res.send(recipe);
+  });
 });
 
 module.exports = router;
