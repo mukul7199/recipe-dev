@@ -21,9 +21,10 @@ router.post("/", (req, res) => {
   const ingredients = req.body.ingredients + "";
   const steps = req.body.steps + "";
 
+  //  Split the ingredients at comma
   const ia = ingredients.split(",");
   const newIngredients = ia.map(item => item.trim());
-
+  //  Split the steps at new line
   const sa = steps.split("\n");
   const newSteps = sa.map(item => item.trim());
 
