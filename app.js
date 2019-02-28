@@ -21,7 +21,7 @@ app.use(function(req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://recipe1234.herokuapp.com/recipes"
+    "https://recipe1234.herokuapp.com"
   );
 
   // Request methods you wish to allow
