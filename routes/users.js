@@ -13,16 +13,21 @@ router.get("/", (req, res) => {
 
 router.post("/login", (req, res) => {
   const { username, password } = req.body;
-  User.findOne({ username }).then(user => {
-    if (user.password === password) {
-      jwt.sign(user.toJSON(), "secret", (err, token) => {
-        res.send(token);
-        // console.log(token, err);
+  User.findOne({ username })
+    .then(user => {
+      console.log(user);
+      bcrypt.compare(password, user.password, function(err, result) {
+        if (result === true) {
+          jwt.sign(user.toJSON(), "secret", (err, token) => {
+            res.send({ token });
+            console.log(token);
+          });
+        } else {
+          res.status(401).json({ message: "Passwords dont match" });
+        }
       });
-    } else {
-      res.send(401);
-    }
-  });
+    })
+    .catch(e => res.send({ message: "user not found" }));
 });
 
 router.post("/signup", (req, res) => {
