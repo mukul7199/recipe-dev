@@ -1,6 +1,7 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const middleware = require("../middleware");
 
 const User = require("../models/User");
 const router = express.Router();
@@ -9,6 +10,10 @@ router.get("/", (req, res) => {
   User.find()
     .then(users => res.send({ users }))
     .catch(e => console.log(e));
+});
+
+router.get("/me", middleware.authenticate, (req, res) => {
+  res.send({ user: req.user });
 });
 
 router.post("/login", (req, res) => {
