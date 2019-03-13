@@ -20,7 +20,7 @@ app.use(function(req, res, next) {
   var allowedOrigins = [
     "http://localhost:3000",
     "https://localhost:8020",
-    "http:recipe1234.herokuapp.com",
+    "http://recipe1234.herokuapp.com",
     "https://recipe1234.herokuapp.com"
   ];
   var origin = req.headers.origin;
@@ -29,7 +29,7 @@ app.use(function(req, res, next) {
   }
   //res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:8020');
   res.header("Access-Control-Allow-Methods", "GET, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.header("Access-Control-Allow-Headers", "Content-Type, authorization");
   res.header("Access-Control-Allow-Credentials", true);
   return next();
 });
