@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 const MONGODB_URI =
   process.env.MONGODB_URI ||
   "mongodb://mukul8299:mukul123@ds231501.mlab.com:31501/recipe-dev";

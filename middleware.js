@@ -1,7 +1,8 @@
 const jwt = require("jsonwebtoken");
 
 const authenticate = (req, res, next) => {
-  let token = req.headers["x-auth-token"] || req.headers["Authenticate"];
+  let token = req.headers["authorization"] || req.headers["x-auth-token"];
+  console.log("Token " + token);
   if (token && token.startsWith("Bearer")) {
     tokens = token.split(" ");
     token = tokens[1];
@@ -16,7 +17,7 @@ const authenticate = (req, res, next) => {
       }
     });
   } else {
-    res.sendStatus(401);
+    res.status(401);
   }
 };
 
